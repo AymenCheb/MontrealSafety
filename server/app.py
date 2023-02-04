@@ -3,7 +3,6 @@ from http import HTTPStatus
 from flask_cors import CORS
 from flask import Flask, make_response, request
 
-
 DEV_PORT = 5000
 DEV_URL = "http://127.0.0.1:" + str(DEV_PORT)
 DATA_FORMAT = "csv"
@@ -35,6 +34,29 @@ class Server:
         @self.app.route("/", methods=["GET"])
         def home():
             return make_response("server is active!!", HTTPStatus.OK)
+
+        # {
+        #   lat: number,
+        #   long: number,
+        #   quart: string,
+        #   category: string,
+        #   date: string,
+        # }
+
+        @self.app.route("api/crimes", methods=["GET"])
+        def crime():
+            try:
+                args = request.args
+                quart = args.get("quart", default="", type=str)
+                category = args.get("category", default="", type=str)
+                date = args.get("date", default="", type=str)
+
+                crimes = []  # method call
+
+                return make_response(crimes) if len(crimes) > 0 else make_response("Aucun crime trouvé",
+                                                                                   HTTPStatus.NOT_FOUND)
+            except BaseException as error:
+                return make_response(repr(error), HTTPStatus.INTERNAL_SERVER_ERROR)
 
         # end create app
         return self.app
