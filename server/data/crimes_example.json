@@ -1,0 +1,18 @@
+{
+  "crimes": [
+    {
+      "lat": 0,
+      "long": 0,
+      "quart": "",
+      "category": "",
+      "date": ""
+    },
+    {
+      "lat": 0,
+      "long": 0,
+      "quart": "",
+      "category": "",
+      "date": ""
+    }
+  ]
+}

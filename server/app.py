@@ -35,13 +35,15 @@ class Server:
         def home():
             return make_response("server is active!!", HTTPStatus.OK)
 
-        # {
-        #   lat: number,
-        #   long: number,
-        #   quart: string,
-        #   category: string,
-        #   date: string,
-        # }
+        # return {
+        #   crimes: [{
+        #           lat: number,
+        #           long: number,
+        #           quart: string,
+        #           category: string,
+        #           date: string,
+        #       }]
+        #   }
 
         @self.app.route("api/crimes", methods=["GET"])
         def crime():
@@ -49,7 +51,8 @@ class Server:
                 args = request.args
                 quart = args.get("quart", default="", type=str)
                 category = args.get("category", default="", type=str)
-                date = args.get("date", default="", type=str)
+                beginning_date = args.get("beginning_date", default="", type=str)
+                end_date = args.get("end_date", default="", type=str)
 
                 crimes = []  # method call
 
