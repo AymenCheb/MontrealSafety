@@ -3,6 +3,7 @@ from http import HTTPStatus
 from flask_cors import CORS
 from flask import Flask, make_response, request
 
+
 DEV_PORT = 8080
 DEV_URL = "http://127.0.0.1:" + str(DEV_PORT)
 DATA_FORMAT = "csv"

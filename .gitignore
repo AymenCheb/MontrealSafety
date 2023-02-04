@@ -11,5 +11,7 @@ package-lock.json
 #angular cache
 client/.angular/cache/
 
+#pycache
+server/__pycache__/
 .idea/
 
