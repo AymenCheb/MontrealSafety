@@ -13,5 +13,8 @@ client/.angular/cache/
 
 #pycache
 server/__pycache__/
+server/Untitled.ipynb
+server/.ipynb_checkpoints/
+
 .idea/
 
