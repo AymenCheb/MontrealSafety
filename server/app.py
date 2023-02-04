@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask import Flask, make_response, request
 
 
-DEV_PORT = 8080
+DEV_PORT = 5000
 DEV_URL = "http://127.0.0.1:" + str(DEV_PORT)
 DATA_FORMAT = "csv"
 
@@ -34,7 +34,7 @@ class Server:
 
         @self.app.route("/", methods=["GET"])
         def home():
-            return make_response("server is active", HTTPStatus.OK)
+            return make_response("server is active!!", HTTPStatus.OK)
 
         # end create app
         return self.app
