@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import Report from 'src/app/interfaces/report';
 import { HttpClientService } from 'src/app/services/http-client.service';
+import "leaflet-heatmap";
 
 declare var HeatmapOverlay:any;
 
