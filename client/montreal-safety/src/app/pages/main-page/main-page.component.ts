@@ -3,6 +3,8 @@ import * as L from 'leaflet';
 import Report from 'src/app/interfaces/report';
 import { HttpClientService } from 'src/app/services/http-client.service';
 
+declare var HeatmapOverlay:any;
+
 var greenIcon = new L.Icon({
   iconUrl: '../../../assets/leaf-green.png',
   shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
@@ -24,7 +26,7 @@ export class MainPageComponent {
   private map : L.Map;
   private reports : Report[] = [];
 
-  public min = 2920;
+  public min = 0;
   public max = 2953;
 
   public jour: boolean = true;
@@ -62,10 +64,6 @@ export class MainPageComponent {
   }
 
   private initMap(): void {
-    this.map = L.map('map', {
-      center: [ 45.55, -73.68 ],
-      zoom: 11
-    });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -73,9 +71,17 @@ export class MainPageComponent {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
+    this.map?.remove();
+    this.map = L.map('map', {
+      center: [ 45.55, -73.68 ],
+      zoom: 11,
+    });
+
     this.reports.forEach((report: Report) => {
       L.marker([report.lat, report.long], {icon: greenIcon}).addTo(this.map);
     })
+
+
 
     tiles.addTo(this.map);
   }
