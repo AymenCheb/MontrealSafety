@@ -4,7 +4,7 @@ import Report from 'src/app/interfaces/report';
 import { HttpClientService } from 'src/app/services/http-client.service';
 
 var icon1 = new L.Icon({
-  iconUrl: '../../../assets/leaf-green.png',
+  iconUrl: '../../../assets/pin1.png',
   options: {
     iconSize:     [38, 95],
     shadowSize:   [50, 64],
@@ -119,7 +119,12 @@ export class MainPageComponent {
     });
 
     this.reports.forEach((report: Report) => {
-      L.marker([report.lat, report.long], {icon: icon1}).addTo(this.map);
+      if (report.category === "Vol de véhicule") L.marker([report.lat, report.long], {icon: icon1}).addTo(this.map);
+      if (report.category === "Vols qualifiés") L.marker([report.lat, report.long], {icon: icon2}).addTo(this.map);
+      if (report.category === "Infractions entrainant la mort") L.marker([report.lat, report.long], {icon: icon3}).addTo(this.map);
+      if (report.category === "Introduction") L.marker([report.lat, report.long], {icon: icon4}).addTo(this.map);
+      if (report.category === "Méfait") L.marker([report.lat, report.long], {icon: icon5}).addTo(this.map);
+
     })
 
 
