@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import Report from 'src/app/interfaces/report';
-import { HttpService } from 'src/app/services/http.service';
-
-// 1 janvier 2015 au 1 fevrier 2023
+import { HttpClientService } from 'src/app/services/http-client.service';
 
 var greenIcon = new L.Icon({
   iconUrl: '../../../assets/leaf-green.png',
@@ -24,36 +22,7 @@ var greenIcon = new L.Icon({
 })
 export class MainPageComponent {
   private map : L.Map;
-  private reports : Report[] = [
-    {
-      lat: 45.56778,
-      long: -73.626778,
-      quart: '',
-      category: '',
-      date: '2022-02-02'
-    },
-    {
-      lat: 45.519122,
-      long: -73.685928,
-      quart: '',
-      category: '',
-      date: '2022-02-02'
-    },
-    {
-      lat: 45.516776,
-      long: -73.591457,
-      quart: '',
-      category: '',
-      date: '2022-02-02'
-    },
-    {
-      lat: 45.602873,
-      long: -73.635117,
-      quart: '',
-      category: '',
-      date: '2022-02-02'
-    },
-  ];
+  private reports : Report[] = [];
 
   public min = 0;
   public max = 2953;
@@ -68,7 +37,6 @@ export class MainPageComponent {
   public introduction: boolean = true;
   public mefait: boolean = true;
 
-  /*
   private fetchInfos() {
     const quarts: string[] = []
     if (this.soir) quarts.push('soir');
@@ -82,12 +50,11 @@ export class MainPageComponent {
     if (this.introduction) categories.push('introduction');
     if (this.mefait) categories.push('mefait');
 
-    this.httpService.getReports(quarts, categories, this.getDayStringFromNumber(this.min), this.getDayStringFromNumber(this.max)).subscribe((data: Report[]) => {
+    this.httpClientService.getReports(quarts, categories, this.getDayStringFromNumber(this.min), this.getDayStringFromNumber(this.max)).subscribe((data: Report[]) => {
       this.reports = data;
       this.initMap();
     });
   }
-  */
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -120,9 +87,9 @@ export class MainPageComponent {
     return min.toLocaleDateString('fr-CA');
   }
 
-  constructor(/*private readonly httpService: HttpService*/) { }
+  constructor(private readonly httpClientService: HttpClientService) { }
 
   ngAfterViewInit(): void {
-    this.initMap();
+    this.fetchInfos();
   }
 }

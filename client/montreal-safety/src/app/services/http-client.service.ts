@@ -6,16 +6,15 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import Report from 'src/app/interfaces/report';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HttpService {
+export class HttpClientService {
   private baseUrl: string;
   private errorMessage: string;
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
     this.baseUrl = 'http://127.0.0.1:5000/api';
     this.errorMessage = '';
   }
