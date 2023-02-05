@@ -1,4 +1,5 @@
 import datetime
+import json
 from http import HTTPStatus
 from flask_cors import CORS
 from flask import Flask, make_response, request
@@ -36,7 +37,7 @@ class Server:
             return make_response("server is active!!", HTTPStatus.OK)
 
         # return {
-        #   crimes: [{
+        #   reports: [{
         #           lat: number,
         #           long: number,
         #           quart: string,
@@ -45,18 +46,18 @@ class Server:
         #       }]
         #   }
 
-        @self.app.route("api/crimes", methods=["GET"])
-        def crime():
+        @self.app.route("/api/reports", methods=["GET"])
+        def report():
             try:
                 args = request.args
-                quart = args.get("quart", default="", type=str)
-                category = args.get("category", default="", type=str)
+                quarts = json.loads(args.get("quarts", default="[]", type=str).replace("'", '"'))
+                categories = json.loads(args.get("categories", default="[]", type=str).replace("'", '"'))
                 beginning_date = args.get("beginning_date", default="", type=str)
                 end_date = args.get("end_date", default="", type=str)
 
-                crimes = []  # method call
+                reports = [1]  # method call
 
-                return make_response(crimes) if len(crimes) > 0 else make_response("Aucun crime trouvé",
+                return make_response(reports) if len(reports) > 0 else make_response("Aucun crime trouvé",
                                                                                    HTTPStatus.NOT_FOUND)
             except BaseException as error:
                 return make_response(repr(error), HTTPStatus.INTERNAL_SERVER_ERROR)
