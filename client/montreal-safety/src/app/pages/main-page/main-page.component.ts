@@ -81,13 +81,13 @@ export class MainPageComponent {
   public min = 2922;
   public max = 2953;
 
-  public jour: boolean = true;
+  public jour: boolean = false;
   public soir: boolean = false;
-  public nuit: boolean = false;
+  public nuit: boolean = true;
 
-  public volVehicule: boolean = false;
-  public volDansVehicule: boolean = true;
-  public volViolent: boolean = false;
+  public volVehicule: boolean = true;
+  public volDansVehicule: boolean = false;
+  public volViolent: boolean = true;
   public meurtre: boolean = true;
   public introduction: boolean = true;
   public mefait: boolean = false;
