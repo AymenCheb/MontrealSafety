@@ -78,19 +78,19 @@ export class MainPageComponent {
   private map : L.Map;
   private reports : Report[] = [];
 
-  public min = 2936;
+  public min = 2922;
   public max = 2953;
 
   public jour: boolean = true;
-  public soir: boolean = true;
-  public nuit: boolean = true;
+  public soir: boolean = false;
+  public nuit: boolean = false;
 
-  public volVehicule: boolean = true;
+  public volVehicule: boolean = false;
   public volDansVehicule: boolean = true;
-  public volViolent: boolean = true;
+  public volViolent: boolean = false;
   public meurtre: boolean = true;
   public introduction: boolean = true;
-  public mefait: boolean = true;
+  public mefait: boolean = false;
 
   fetchInfos() {
     const quarts: string[] = [];
