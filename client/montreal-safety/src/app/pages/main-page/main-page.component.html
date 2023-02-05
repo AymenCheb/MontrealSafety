@@ -7,12 +7,12 @@
         <div class="input">
           <h2>Catégories</h2>
           <div class="checkboxes">
-            <mat-button-toggle (change)="this.volVehicule = !this.volVehicule; fetchInfos()" class="category" [checked]="this.volVehicule"><img src="../../../assets/pin1.png" height="15px" />  Vol de véhicule</mat-button-toggle>
-            <mat-button-toggle (change)="this.volViolent = !this.volViolent; fetchInfos()" class="category" [checked]="this.volViolent"><img src="../../../assets/pin2.png" height="15px" />  Vol violent</mat-button-toggle>
-            <mat-button-toggle (change)="this.meurtre = !this.meurtre; fetchInfos()" class="category" [checked]="this.meurtre"><img src="../../../assets/pin3.png" height="15px" />  Infraction fatale</mat-button-toggle>
-            <mat-button-toggle (change)="this.introduction = !this.introduction; fetchInfos()" class="category" [checked]="this.introduction"><img src="../../../assets/pin4.png" height="15px" />  Intr. par effraction</mat-button-toggle>
-            <mat-button-toggle (change)="this.mefait = !this.mefait; fetchInfos()" class="category" [checked]="this.mefait"><img src="../../../assets/pin5.png" height="15px" />  Méfait</mat-button-toggle>
-            <mat-button-toggle (change)="this.volDansVehicule = !this.volDansVehicule; fetchInfos()" class="category" [checked]="this.volDansVehicule"><img src="../../../assets/pin6.png" height="15px" />  Vol dans véhicule</mat-button-toggle>
+            <mat-button-toggle matTooltip="Un individu commet un vol de véhicule s'il prend celui-ci avec l'intention d'en priver définitivement ou temporairement son propriétaire" (change)="this.volVehicule = !this.volVehicule; fetchInfos()" class="category" [checked]="this.volVehicule"><img src="../../../assets/pin1.png" height="15px" />  Vol de véhicule</mat-button-toggle>
+            <mat-button-toggle matTooltip="Le vol qualifié est un vol perpétré avec violence envers un ou des individus, au moyen d’une arme, d’un objet ou de menaces. L’emploi de la violence peut avoir lieu immédiatement avant ou après le moment du vol." (change)="this.volViolent = !this.volViolent; fetchInfos()" class="category" [checked]="this.volViolent"><img src="../../../assets/pin2.png" height="15px" />  Vol qualifié</mat-button-toggle>
+            <mat-button-toggle matTooltip="Un individu commet une infraction fatale s'il cause la mort d'un autre individu" (change)="this.meurtre = !this.meurtre; fetchInfos()" class="category" [checked]="this.meurtre"><img src="../../../assets/pin3.png" height="15px" />  Infraction fatale</mat-button-toggle>
+            <mat-button-toggle matTooltip="Un individu commet une introduction par effraction s'il entre dans un endroit sans autorisation et y commet un crime" (change)="this.introduction = !this.introduction; fetchInfos()" class="category" [checked]="this.introduction"><img src="../../../assets/pin4.png" height="15px" />  Intr. par effraction</mat-button-toggle>
+            <mat-button-toggle matTooltip="Un individu commet un méfait s'il détruit ou détériore un bien. Ou bien s'il empêche, interrompt ou gêne une personne dans l’emploi, la jouissance ou l’exploitation légitime d’un bien" (change)="this.mefait = !this.mefait; fetchInfos()" class="category" [checked]="this.mefait"><img src="../../../assets/pin5.png" height="15px" />  Méfait</mat-button-toggle>
+            <mat-button-toggle matTooltip="Un individu commet un vol dans un véhicule lorsqu'il s'empare du bien d'autrui situé dans le véhicule, qu'il commette ou non un dommage en s'y introduisant." (change)="this.volDansVehicule = !this.volDansVehicule; fetchInfos()" class="category" [checked]="this.volDansVehicule"><img src="../../../assets/pin6.png" height="15px" />  Vol dans véhicule</mat-button-toggle>
           </div>
         </div>
         <div class="input">
@@ -24,11 +24,26 @@
           </div>
         </div>
         <div class="input">
-          <h2>Dates</h2>
+          <h2 id="dates">Dates</h2>
           <mat-slider color="accent" [min]="2922" [max]="2953" discrete [displayWith]="getDayFromNumber">
             <input (change)="fetchInfos()" matSliderStartThumb [(ngModel)]="this.min">
             <input (change)="fetchInfos()" matSliderEndThumb [(ngModel)]="this.max">
           </mat-slider>
+
+          <div class="infos">
+            <span class="bound">{{getDayLocaleFromNumber(this.min)}}</span>
+            <span class="au">au</span>
+            <span class="bound">{{getDayLocaleFromNumber(this.max)}}</span>
+          </div>
+        </div>
+
+        <div class="counters">
+          <div class="counter"><img src="../../../assets/pin1.png" height="15px" /> {{countCategory("Vol de véhicule à moteur")}}</div>
+          <div class="counter"><img src="../../../assets/pin2.png" height="15px" /> {{countCategory("Vols qualifiés")}}</div>
+          <div class="counter"><img src="../../../assets/pin3.png" height="15px" /> {{countCategory("Infractions entrainant la mort")}}</div>
+          <div class="counter"><img src="../../../assets/pin4.png" height="15px" /> {{countCategory("Introduction")}}</div>
+          <div class="counter"><img src="../../../assets/pin5.png" height="15px" /> {{countCategory("Méfait")}}</div>
+          <div class="counter"><img src="../../../assets/pin6.png" height="15px" /> {{countCategory("Vol dans / sur véhicule à moteur")}}</div>
         </div>
       </div>
     </div>

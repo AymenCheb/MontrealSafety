@@ -155,6 +155,12 @@ export class MainPageComponent {
     return min.toLocaleDateString('en-UK', {day: '2-digit', month: '2-digit', year: 'numeric'});
   }
 
+  getDayLocaleFromNumber(day: number) {
+    const min = new Date('2015-01-02')
+    min.setDate(min.getDate() + day);
+    return min.toLocaleDateString('fr-ca', {day: '2-digit', month: 'short', year: 'numeric'});
+  }
+
   getDayStringFromNumber(day: number) {
     const min = new Date('2015-01-02')
     min.setDate(min.getDate() + day);
@@ -165,5 +171,16 @@ export class MainPageComponent {
 
   ngAfterViewInit(): void {
     this.fetchInfos();
+  }
+
+  countCategory(category: string) {
+    let count = 0;
+
+    for (const report of this.reports) {
+      if (report.category === category)
+        count++;
+    }
+
+    return count;
   }
 }

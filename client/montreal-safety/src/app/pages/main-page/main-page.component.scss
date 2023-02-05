@@ -60,7 +60,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  gap: 50px;
+  gap: 30px;
   margin-top: 20px;
   padding: 0 50px;
 }
@@ -97,7 +97,7 @@ mat-button-toggle.quart {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   justify-content: center;
   align-content: center;
@@ -124,6 +124,7 @@ span {
 
 mat-button-toggle {
   width: 140px;
+  height: 50px;
   font-size: 9pt;
 }
 
@@ -137,4 +138,43 @@ mat-button-toggle {
   background-color: #4d4d4d;
   border: 3px solid #33f0a2;
   color: white;
+}
+
+.bound {
+  color: white;
+  font-size: 11pt;
+  width: 150px;
+  padding: 10px;
+}
+
+.au {
+  color: white;
+  font-size: 11pt;
+}
+
+#dates {
+  margin-bottom: 5px;
+  margin-right: 80%;
+  text-align: left;
+  width: 100%;
+}
+
+.counters {
+  display: flex;
+  gap: 15px;
+  font-size: 10pt;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  background-color: #444;
+  padding: 5px 20px;
+  border-radius: 4px;
+
+  .counter {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 }
