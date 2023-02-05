@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 
-default_dataset = os.path.join('data', 'january_last_2.csv')
+default_dataset = os.path.join('data', 'january.csv')
 
 
 def get_crimes_by_date(df, start, end):
