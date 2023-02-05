@@ -1,6 +1,9 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import Report from 'src/app/interfaces/report';
+import { HttpService } from 'src/app/services/http.service';
+
+// 1 janvier 2015 au 1 fevrier 2023
 
 var greenIcon = new L.Icon({
   iconUrl: '../../../assets/leaf-green.png',
@@ -13,7 +16,6 @@ var greenIcon = new L.Icon({
     popupAnchor:  [-3, -76]
  }
 });
-
 
 @Component({
   selector: 'app-main-page',
@@ -53,6 +55,40 @@ export class MainPageComponent {
     },
   ];
 
+  public min = 0;
+  public max = 2953;
+
+  public jour: boolean = true;
+  public soir: boolean = true;
+  public nuit: boolean = true;
+
+  public volVehicule: boolean = true;
+  public volViolent: boolean = true;
+  public meurtre: boolean = true;
+  public introduction: boolean = true;
+  public mefait: boolean = true;
+
+  /*
+  private fetchInfos() {
+    const quarts: string[] = []
+    if (this.soir) quarts.push('soir');
+    if (this.jour) quarts.push('jour');
+    if (this.nuit) quarts.push('nuit');
+
+    const categories: string[] = []
+    if (this.volVehicule) categories.push('volVehicule');
+    if (this.volViolent) categories.push('volViolent');
+    if (this.meurtre) categories.push('meurtre');
+    if (this.introduction) categories.push('introduction');
+    if (this.mefait) categories.push('mefait');
+
+    this.httpService.getReports(quarts, categories, this.getDayStringFromNumber(this.min), this.getDayStringFromNumber(this.max)).subscribe((data: Report[]) => {
+      this.reports = data;
+      this.initMap();
+    });
+  }
+  */
+
   private initMap(): void {
     this.map = L.map('map', {
       center: [ 45.55, -73.68 ],
@@ -72,7 +108,19 @@ export class MainPageComponent {
     tiles.addTo(this.map);
   }
 
-  constructor() { }
+  getDayFromNumber(day: number) {
+    const min = new Date('2015-01-02')
+    min.setDate(min.getDate() + day);
+    return min.toLocaleDateString('en-UK', {day: '2-digit', month: '2-digit', year: 'numeric'});
+  }
+
+  getDayStringFromNumber(day: number) {
+    const min = new Date('2015-01-02')
+    min.setDate(min.getDate() + day);
+    return min.toLocaleDateString('fr-CA');
+  }
+
+  constructor(/*private readonly httpService: HttpService*/) { }
 
   ngAfterViewInit(): void {
     this.initMap();
