@@ -58,6 +58,17 @@ var icon5 = new L.Icon({
  }
 });
 
+var icon6 = new L.Icon({
+  iconUrl: '../../../assets/pin6.png',
+  options: {
+    iconSize:     [38, 95],
+    shadowSize:   [50, 64],
+    iconAnchor:   [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [-3, -76]
+ }
+});
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
@@ -75,6 +86,7 @@ export class MainPageComponent {
   public nuit: boolean = true;
 
   public volVehicule: boolean = true;
+  public volDansVehicule: boolean = true;
   public volViolent: boolean = true;
   public meurtre: boolean = true;
   public introduction: boolean = true;
@@ -88,13 +100,15 @@ export class MainPageComponent {
 
     const categories: string[] = [];
     if (this.volVehicule) categories.push('volVehicule');
+    if (this.volDansVehicule) categories.push('VolDansVehicule');
     if (this.volViolent) categories.push('volViolent');
     if (this.meurtre) categories.push('meurtre');
     if (this.introduction) categories.push('introduction');
     if (this.mefait) categories.push('mefait');
 
+    this.reports = []
     this.httpClientService.getReports(quarts, categories, this.getDayStringFromNumber(this.min), this.getDayStringFromNumber(this.max)).subscribe(async (data: any) => {
-      this.reports = []
+
       await data.reports.forEach(async (row: any) => {
         const reportObj = await JSON.parse(row);
         this.reports.push({lat: reportObj.LATITUDE, long: reportObj.LONGITUDE, category: reportObj.CATEGORIE, quart: reportObj.QUART, date: reportObj.DATE })
@@ -102,6 +116,8 @@ export class MainPageComponent {
 
       this.initMap();
     });
+
+    this.initMap();
   }
 
   private initMap(): void {
@@ -119,11 +135,12 @@ export class MainPageComponent {
     });
 
     this.reports.forEach((report: Report) => {
-      if (report.category === "Vol de véhicule") L.marker([report.lat, report.long], {icon: icon1}).addTo(this.map);
+      if (report.category === "Vol de véhicule à moteur") L.marker([report.lat, report.long], {icon: icon1}).addTo(this.map);
       if (report.category === "Vols qualifiés") L.marker([report.lat, report.long], {icon: icon2}).addTo(this.map);
       if (report.category === "Infractions entrainant la mort") L.marker([report.lat, report.long], {icon: icon3}).addTo(this.map);
       if (report.category === "Introduction") L.marker([report.lat, report.long], {icon: icon4}).addTo(this.map);
       if (report.category === "Méfait") L.marker([report.lat, report.long], {icon: icon5}).addTo(this.map);
+      if (report.category === "Vol dans / sur véhicule à moteur") L.marker([report.lat, report.long], {icon: icon6}).addTo(this.map);
 
     })
 
