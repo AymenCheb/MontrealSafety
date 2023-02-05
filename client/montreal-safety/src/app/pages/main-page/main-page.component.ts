@@ -2,13 +2,53 @@ import { Component } from '@angular/core';
 import * as L from 'leaflet';
 import Report from 'src/app/interfaces/report';
 import { HttpClientService } from 'src/app/services/http-client.service';
-import "leaflet-heatmap";
 
-declare var HeatmapOverlay:any;
-
-var greenIcon = new L.Icon({
+var icon1 = new L.Icon({
   iconUrl: '../../../assets/leaf-green.png',
-  shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+  options: {
+    iconSize:     [38, 95],
+    shadowSize:   [50, 64],
+    iconAnchor:   [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [-3, -76]
+ }
+});
+
+var icon2 = new L.Icon({
+  iconUrl: '../../../assets/pin2.png',
+  options: {
+    iconSize:     [38, 95],
+    shadowSize:   [50, 64],
+    iconAnchor:   [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [-3, -76]
+ }
+});
+
+var icon3 = new L.Icon({
+  iconUrl: '../../../assets/pin3.png',
+  options: {
+    iconSize:     [38, 95],
+    shadowSize:   [50, 64],
+    iconAnchor:   [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [-3, -76]
+ }
+});
+
+var icon4 = new L.Icon({
+  iconUrl: '../../../assets/pin4.png',
+  options: {
+    iconSize:     [38, 95],
+    shadowSize:   [50, 64],
+    iconAnchor:   [22, 94],
+    shadowAnchor: [4, 62],
+    popupAnchor:  [-3, -76]
+ }
+});
+
+var icon5 = new L.Icon({
+  iconUrl: '../../../assets/pin5.png',
   options: {
     iconSize:     [38, 95],
     shadowSize:   [50, 64],
@@ -79,7 +119,7 @@ export class MainPageComponent {
     });
 
     this.reports.forEach((report: Report) => {
-      L.marker([report.lat, report.long], {icon: greenIcon}).addTo(this.map);
+      L.marker([report.lat, report.long], {icon: icon1}).addTo(this.map);
     })
 
 
