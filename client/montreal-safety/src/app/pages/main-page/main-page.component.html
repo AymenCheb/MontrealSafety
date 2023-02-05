@@ -7,26 +7,26 @@
         <div class="input">
           <h2>Catégories</h2>
           <div class="checkboxes">
-            <mat-button-toggle class="category" [checked]="this.volVehicule"><img src="../../../assets/leaf-green.png" height="30px" />  Vol de véhicule</mat-button-toggle>
-            <mat-button-toggle class="category" [checked]="this.volViolent"><img src="../../../assets/leaf-green.png" height="30px" />  Vol violent</mat-button-toggle>
-            <mat-button-toggle class="category" [checked]="this.meurtre"><img src="../../../assets/leaf-green.png" height="30px" />  Infraction fatale</mat-button-toggle>
-            <mat-button-toggle class="category" [checked]="this.introduction"><img src="../../../assets/leaf-green.png" height="30px" />  Introduction</mat-button-toggle>
-            <mat-button-toggle class="category" [checked]="this.mefait"><img src="../../../assets/leaf-green.png" height="30px" />  Méfait</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="category" [checked]="this.volVehicule"><img src="../../../assets/leaf-green.png" height="30px" />  Vol de véhicule</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="category" [checked]="this.volViolent"><img src="../../../assets/leaf-green.png" height="30px" />  Vol violent</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="category" [checked]="this.meurtre"><img src="../../../assets/leaf-green.png" height="30px" />  Infraction fatale</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="category" [checked]="this.introduction"><img src="../../../assets/leaf-green.png" height="30px" />  Introduction</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="category" [checked]="this.mefait"><img src="../../../assets/leaf-green.png" height="30px" />  Méfait</mat-button-toggle>
           </div>
         </div>
         <div class="input">
           <h2>Moments de la journée</h2>
           <div class="quarts">
-            <mat-button-toggle class="quart" [checked]="this.jour">Jour</mat-button-toggle>
-            <mat-button-toggle class="quart" [checked]="this.soir">Soir</mat-button-toggle>
-            <mat-button-toggle class="quart" [checked]="this.nuit">Nuit</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="quart" [checked]="this.jour">Jour</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="quart" [checked]="this.soir">Soir</mat-button-toggle>
+            <mat-button-toggle (change)="fetchInfos" class="quart" [checked]="this.nuit">Nuit</mat-button-toggle>
           </div>
         </div>
         <div class="input">
           <h2>Dates</h2>
           <mat-slider color="accent" [min]="0" [max]="2953" discrete [displayWith]="getDayFromNumber">
-            <input matSliderStartThumb [(ngModel)]="this.min">
-            <input matSliderEndThumb [(ngModel)]="this.max">
+            <input (input)="fetchInfos" matSliderStartThumb [(ngModel)]="this.min">
+            <input (input)="fetchInfos" matSliderEndThumb [(ngModel)]="this.max">
           </mat-slider>
         </div>
       </div>

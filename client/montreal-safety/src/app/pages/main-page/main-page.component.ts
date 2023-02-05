@@ -24,7 +24,7 @@ export class MainPageComponent {
   private map : L.Map;
   private reports : Report[] = [];
 
-  public min = 0;
+  public min = 2920;
   public max = 2953;
 
   public jour: boolean = true;
@@ -37,21 +37,26 @@ export class MainPageComponent {
   public introduction: boolean = true;
   public mefait: boolean = true;
 
-  private fetchInfos() {
-    const quarts: string[] = []
+  fetchInfos() {
+    const quarts: string[] = [];
     if (this.soir) quarts.push('soir');
     if (this.jour) quarts.push('jour');
     if (this.nuit) quarts.push('nuit');
 
-    const categories: string[] = []
+    const categories: string[] = [];
     if (this.volVehicule) categories.push('volVehicule');
     if (this.volViolent) categories.push('volViolent');
     if (this.meurtre) categories.push('meurtre');
     if (this.introduction) categories.push('introduction');
     if (this.mefait) categories.push('mefait');
 
-    this.httpClientService.getReports(quarts, categories, this.getDayStringFromNumber(this.min), this.getDayStringFromNumber(this.max)).subscribe((data: Report[]) => {
-      this.reports = data;
+    this.httpClientService.getReports(quarts, categories, this.getDayStringFromNumber(this.min), this.getDayStringFromNumber(this.max)).subscribe(async (data: any) => {
+      this.reports = []
+      await data.reports.forEach(async (row: any) => {
+        const reportObj = await JSON.parse(row);
+        this.reports.push({lat: reportObj.LATITUDE, long: reportObj.LONGITUDE, category: reportObj.CATEGORIE, quart: reportObj.QUART, date: reportObj.DATE })
+      })
+
       this.initMap();
     });
   }

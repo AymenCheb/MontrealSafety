@@ -1,9 +1,4 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpStatusCode,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import Report from 'src/app/interfaces/report';
@@ -14,7 +9,7 @@ import Report from 'src/app/interfaces/report';
 export class HttpClientService {
   private baseUrl: string;
   private errorMessage: string;
-  constructor(private readonly http: HttpClient) {
+  constructor(protected readonly http: HttpClient) {
     this.baseUrl = 'http://127.0.0.1:5000/api';
     this.errorMessage = '';
   }
@@ -24,10 +19,10 @@ export class HttpClientService {
     categories: string[],
     beginningDate?: string,
     endDate?: string
-  ): Observable<Report[]> {
-    let requestUrl = `${this.baseUrl}/reports?quart${
+  ): Observable<string[]> {
+    let requestUrl = `${this.baseUrl}/reports?quarts${
       quarts.length > 0 ? '=' + JSON.stringify(quarts) : ''
-    }&category${
+    }&categories${
       categories.length > 0 ? '=' + JSON.stringify(categories) : ''
     }&beginning_date${beginningDate ? '=' + beginningDate : ''}&end_date${
       endDate ? '=' + endDate : ''
@@ -35,6 +30,6 @@ export class HttpClientService {
 
     console.info(requestUrl);
 
-    return this.http.get<Report[]>(requestUrl);
+    return this.http.get<string[]>(requestUrl);
   }
 }
