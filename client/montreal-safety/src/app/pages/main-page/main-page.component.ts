@@ -26,7 +26,7 @@ export class MainPageComponent {
   private map : L.Map;
   private reports : Report[] = [];
 
-  public min = 0;
+  public min = 2936;
   public max = 2953;
 
   public jour: boolean = true;
