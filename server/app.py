@@ -4,6 +4,8 @@ from http import HTTPStatus
 from flask_cors import CORS
 from flask import Flask, make_response, request
 
+from server import report_utils
+
 DEV_PORT = 5000
 DEV_URL = "http://127.0.0.1:" + str(DEV_PORT)
 DATA_FORMAT = "csv"
@@ -52,10 +54,10 @@ class Server:
                 args = request.args
                 quarts = json.loads(args.get("quarts", default="[]", type=str).replace("'", '"'))
                 categories = json.loads(args.get("categories", default="[]", type=str).replace("'", '"'))
-                beginning_date = args.get("beginning_date", default="", type=str)
-                end_date = args.get("end_date", default="", type=str)
+                beginning_date = args.get("beginning_date", default="2015-01-01", type=str)
+                end_date = args.get("end_date", default="2023-02-01", type=str)
 
-                reports = [1]  # method call
+                reports = report_utils.get_reports(quarts, categories, beginning_date, end_date)  # method call
 
                 return make_response(reports) if len(reports) > 0 else make_response("Aucun crime trouvé",
                                                                                    HTTPStatus.NOT_FOUND)
