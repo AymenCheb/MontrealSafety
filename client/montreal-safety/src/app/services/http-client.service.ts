@@ -10,7 +10,7 @@ export class HttpClientService {
   private baseUrl: string;
   private errorMessage: string;
   constructor(protected readonly http: HttpClient) {
-    this.baseUrl = 'http://127.0.0.1:5000/api';
+    this.baseUrl = 'https://montrealmischief-spriouocsq-uc.a.run.app/api';
     this.errorMessage = '';
   }
 
